@@ -9,7 +9,7 @@
 const prompt = require("prompt-sync")();
 
 const ROWS = 3;
-const COLS = 3;
+const COLUMNS = 3;
 
 const SYMBOLS_COUNT = {
   A: 2,
@@ -73,7 +73,7 @@ const spin = () => {
   }
 
   const reels = [];
-  for (let i = 0; i < COLS; i++) {
+  for (let i = 0; i < COLUMNS; i++) {
     reels.push([]);
     const reelSymbols = [...symbols];
     for (let j = 0; j < ROWS; j++) {
@@ -87,12 +87,12 @@ const spin = () => {
   return reels;
 };
 
-const transpose = (reels) => {
+const matrix = (reels) => {
   const rows = [];
 
   for (let i = 0; i < ROWS; i++) {
     rows.push([]);
-    for (let j = 0; j < COLS; j++) {
+    for (let j = 0; j < COLUMNS; j++) {
       rows[i].push(reels[j][i]);
     }
   }
@@ -144,7 +144,7 @@ const game = () => {
     const bet = getBet(balance, numberOfLines);
     balance -= bet * numberOfLines;
     const reels = spin();
-    const rows = transpose(reels);
+    const rows = matrix(reels);
     printRows(rows);
     const winnings = getWinnings(rows, bet, numberOfLines);
     balance += winnings;
